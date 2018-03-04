@@ -8,4 +8,5 @@ urlpatterns = [
     path('', views.index, name='index'),
     path('feed_list/', views.feed_list, name='feed_list'),
     path('<str:filter_option>/<str:keyword>/regex_filter/', views.regex_filter, name='regex_filter'),
+    path('<str:filter_option>/<str:keyword>/xq_filter/', views.xQuery_filter, name='xq_filter')
 ]

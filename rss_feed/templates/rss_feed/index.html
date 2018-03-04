@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>RSS Feed</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.6/css/bootstrap.min.css">
  <!--   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.10.1/bootstrap-table.min.css"> -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
@@ -46,11 +46,26 @@
                     data = {data: jsonFromFile.data}
                     $('#table_2').bootstrapTable(data);
                 });
+         });
 
 
-        });
+         $('#btnSearch_2').on('click', function (e) {
 
+                var $selected_option_2 = $('input[name=optradio_2]:checked').val();
+                console.log($selected_option_2);
 
+                var $text_2 = $('#text_2').val();
+                console.log($text_2);
+
+                var $url_xq_filter = "/rss_feed/" + $selected_option_2 + "/" + $text_2 + "/xq_filter/";
+                console.log($url_xq_filter)
+
+                $.getJSON($url_xq_filter, function (jsonFromFile) {
+                 console.log('aaaaaa')
+                    data = {data: jsonFromFile.data}
+                    $('#table_3').bootstrapTable(data);
+                });
+         });
 
     });
 
@@ -63,20 +78,20 @@
 
 
       <div class="col-lg-12 col-lg-4">
-          <p>Elementos sin filtar</p>
+          <p>Elementos sin filtrar</p>
            <table id="table_1" class="table table-bordered table-striped">
 
                 <thead class="thead-dark">
                     <tr>
-                        <th data-field="feed_id">ID</th>
-                        <th data-field="feed_title">Titulo</th>
+                        <th data-field="feed_id">No</th>
+                        <th data-field="feed_title">Título</th>
                     </tr>
                 </thead>
             </table>
       </div>
 
         <div class="col-lg-12 col-lg-4">
-            <p>Filtro: Seleccione una opción</p>
+            <p>Filtro(Regex): Seleccione una opción</p>
 
             <div class="radio">
                 <label class="radio-inline"><input type="radio" name="optradio" value="title" checked>Titulo</label>
@@ -92,16 +107,38 @@
 
                 <thead class="thead-dark">
                     <tr>
-                        <th data-field="feed_id">ID</th>
+                        <th data-field="feed_id">No</th>
                         <th data-field="feed_title">Titulo</th>
-                    </tr>
+        >            </tr>
                 </thead>
             </table>
         </div>
 
-        <div class="col-lg-12 col-lg-4">Columna 3</div>
+        <div class="col-lg-12 col-lg-4">
+            <p>Filtro(XQuery/LXML): Seleccione una opción</p>
 
+            <div class="radio">
+                <label class="radio-inline"><input type="radio" name="optradio_2" value="title" checked>Titulo</label>
+                <label class="radio-inline"><input type="radio" name="optradio_2" value="description">Descripción</label>
+            </div>
+            <div class="form-group">
+                <label>Palabra clave:</label>
+                <input type="text" class="form-control" id="text_2">
+                <button type="button" class="btn btn-primary" id="btnSearch_2">Buscar</button>
+            </div>
 
+           <table id="table_3" class="table table-bordered table-striped" >
+
+                <thead class="thead-dark">
+                    <tr>
+                        <th data-field="feed_id">No</th>
+                        <th data-field="feed_title">Titulo</th>
+                        <th  data-field="feed_link">Enlace</th>
+                        <th data-field="feed_Fecp">Fecha Publicación</th>
+                    </tr>
+                </thead>
+            </table>
+        </div>
 
     </div>
 </body>
