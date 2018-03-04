@@ -2,3 +2,5 @@
 *.swp
 db.sqlite3
 .idea
+profesores.json
+noticias.json

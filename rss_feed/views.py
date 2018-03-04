@@ -105,6 +105,7 @@ def xQuery_filter(request, filter_option, keyword):
     #    key = request.GET['key']
     response_data["data"] = xQuery_data(url_list, filter_option, keyword)
 
+
     return JsonResponse(response_data)
 
 
@@ -215,7 +216,7 @@ def feed_list(request):
 
     response_data = {}
     response_data["data"] = parse_data(url_list)
-
+    print(response_data)
     return JsonResponse(response_data)
 
 
