@@ -23,7 +23,7 @@
 
     $(document).ready(function(){
 
-         $.getJSON("http://127.0.0.1:8000/rss_feed/feed_list/", function (jsonFromFile) {
+         $.getJSON("/rss_feed/feed_list/", function (jsonFromFile) {
             $('#table_1').bootstrapTable({
                 data: jsonFromFile.data
             })
@@ -38,13 +38,13 @@
                 var $text = $('#text').val();
                 console.log($text);
 
-                var $url_regex_filter = "http://127.0.0.1:8000/rss_feed/" + $selected_option + "/" + $text + "/regex_filter/";
+                var $url_regex_filter = "/rss_feed/" + $selected_option + "/" + $text + "/regex_filter/";
                 console.log($url_regex_filter)
 
                 $.getJSON($url_regex_filter, function (jsonFromFile) {
                  console.log('aaaaaa')
                     data = {data: jsonFromFile.data}
-                    $('#table_2').bootstrapTable('load',data);
+                    $('#table_2').bootstrapTable(data);
                 });
 
 
