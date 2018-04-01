@@ -20,5 +20,6 @@ urlpatterns = [
     path('main/', include('main.urls')),
     path('rss_feed/', include('rss_feed.urls')),
     path('crawler/', include('crawler.urls')),
+    path('artworks/', include('artworks.urls')),
     path('admin/', admin.site.urls),
 ]

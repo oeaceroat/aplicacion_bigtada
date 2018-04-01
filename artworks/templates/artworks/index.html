@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <title>Artworks</title>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.6/css/bootstrap.min.css">
+ <!--   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.10.1/bootstrap-table.min.css"> -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.6/js/bootstrap.min.js"></script>
+ <!--   <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.10.1/bootstrap-table.min.js"></script> -->
+
+
+        <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.11.1/bootstrap-table.min.css">
+
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.11.1/bootstrap-table.min.js"></script>
+
+    <!-- Latest compiled and minified Locales -->
+    <script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.11.1/locale/bootstrap-table-zh-CN.min.js"></script>
+
+    <script>
+
+        $(document).ready(function(){
+
+
+
+         $('#btnSearch_2').on('click', function (e) {
+
+                var $text_1 = $('#text_1').val();
+                var $text_2 = $('#text_2').val();
+                var $text_3 = $('#text_3').val();
+                var $text_4 = $('#text_4').val();
+                var $text_5 = $('#text_5').val();
+
+                if($text_1==''){
+                    $text_1=null
+                }
+                if($text_2==''){
+                    $text_2=null
+                }
+                if($text_3==''){
+                    $text_3=null
+                }
+                if($text_4==''){
+                    $text_4=null
+                }
+                if($text_5==''){
+                    $text_5=null
+                }
+
+
+                console.log("var " + $text_1);
+                console.log("var " + $text_2);
+                console.log("var " + $text_3);
+                console.log("var " + $text_4);
+                console.log("var " + $text_5);
+
+
+                var $url_search_graph = "/artworks/" + $text_1 + "/" + $text_2 + "/" +
+                                        $text_3 + "/" + $text_4 + "/" + $text_5 + "/search_graph/";
+                console.log($url_search_graph)
+
+                $.getJSON($url_search_graph, function (jsonFromFile) {
+
+                    data = {data: jsonFromFile.data}
+                    console.log("data:" + data);
+                    <!--$('#table_3').bootstrapTable(data);-->
+
+                    document.getElementById("graphImage").src = "{% static 'artworks/grafo_pru.png' %}"
+
+                });
+         });
+
+    });
+
+    </script>
+
+</head>
+<body>
+    <div class="container" style="width:1800px">
+
+
+
+        <div class="col-lg-8 col-lg-4">
+            <h3> Criterio de Búsqueda</h3>
+
+            <!--<div class="radio">-->
+                <!--<label class="radio-inline"><input type="radio" name="optradio_2" value="title" checked>Obra de arte</label>-->
+                <!--<label class="radio-inline"><input type="radio" name="optradio_2" value="author">Autor</label>-->
+            <!--</div>-->
+            <div class="form-group">
+                <table>
+                    <tr>
+                        <td>
+                            <label>Nombre obra artística:</label>
+                            <input type="text" class="form-control" id="text_1">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label>Nombre personaje:</label>
+                            <input type="text" class="form-control" id="text_2">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label>País:</label>
+                            <input type="text" class="form-control" id="text_3">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label>Año Incial:</label>
+                            <input type="text" class="form-control" id="text_4">
+                        </td>
+                        <td>
+                            <label>Año Final:</label>
+                            <input type="text" class="form-control" id="text_5">
+                        </td>
+                    </tr>
+
+                </table>
+
+                <button type="button" class="btn btn-primary" id="btnSearch_2">Buscar</button>
+            </div>
+            <div>
+
+                <img id="graphImage" src="#" alt="myimage"/>
+            </div>
+
+          <!-- <table id="table_3" class="table table-bordered table-striped" >
+
+                <thead class="thead-dark">
+                    <tr>
+                        <th data-field="feed_id">No</th>
+                        <th data-field="feed_title">Titulo</th>
+                        <th  data-field="feed_link">Enlace</th>
+                        <th data-field="feed_Fecp">Fecha Publicación</th>
+                    </tr>
+                </thead>
+            </table>-->
+        </div>
+
+    </div>
+</body>
+</html>

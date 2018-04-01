@@ -33,6 +33,7 @@ ALLOWED_HOSTS = ['172.24.101.65', '127.0.0.1']
 INSTALLED_APPS = [
     'rss_feed.apps.RssFeedConfig',
     'crawler.apps.CrawlerConfig',
+    'artworks.apps.ArtworksConfig',
     'main.apps.MainConfig',
     'django.contrib.admin',
     'django.contrib.auth',
