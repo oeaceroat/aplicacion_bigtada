@@ -1,4 +1,6 @@
 import base64
+import matplotlib
+matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 
 from django.http import HttpResponse, JsonResponse
@@ -60,7 +62,7 @@ def search_graph(request, title, person, place, year_ini, year_fin):
     print('Nodos: ', graph.number_of_nodes())
     print('Realaciones: ', graph.number_of_edges())
 
-    # plt.figure(figsize=(10, 10))
+    plt.figure(figsize=(10, 10))
 
     nx.draw_networkx(G=graph, node_size=100, font_size=8)
     url_graph = settings.BASE_DIR + '/artworks/static/artworks/grafo_pru.png'
