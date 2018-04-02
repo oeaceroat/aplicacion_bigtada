@@ -69,7 +69,8 @@
                     console.log("data:" + data);
                     <!--$('#table_3').bootstrapTable(data);-->
 
-                    document.getElementById("graphImage").src = "{% static 'artworks/grafo_pru.png' %}"
+                    <!--document.getElementById("graphImage").src = "{% static 'artworks/grafo_pru.png' %}"-->
+                    document.getElementById("graphImage2").src = "{% static 'artworks/grafo2_pru.png' %}"
 
                 });
          });
@@ -125,10 +126,13 @@
                 </table>
 
                 <button type="button" class="btn btn-primary" id="btnSearch_2">Buscar</button>
-            </div>
-            <div>
 
-                <img id="graphImage" src="#" alt="myimage"/>
+            </div>
+            <!--<div>-->
+                <!--<img id="graphImage" src="#" alt="Aquí se mostrará el grafo completo"/>-->
+            <!--</div>-->
+            <div>
+                <img id="graphImage2" src="#" alt="Aquí se mostrará una muestra del grafo"/>
             </div>
 
           <!-- <table id="table_3" class="table table-bordered table-striped" >
