@@ -1,5 +1,7 @@
 import base64
 import matplotlib
+from cycler import concat
+
 matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 
@@ -36,31 +38,48 @@ def index(request):
 
 def getPolaridad(request):
 
-    try:
-        #client = MongoClient('127.0.0.1', 27017)
-        # db = client.taller3 #local
+    #try:
+   # client = MongoClient('127.0.0.1', 27017)
+    #db = client.taller3 #local
 
-        client = MongoClient('bigdata-mongodb-01', 27017)#Produccion
-        db = client.Grupo01_Taller3 #Produccion
+    client = MongoClient('bigdata-mongodb-01', 27017)#Produccion
+    db = client.Grupo01_Taller3 #Produccion
 
-        print(db.collection_names())
-        collection = db.tweets_tema
+    print(db.collection_names())
+    collection = db.tweets_tema
 
-        tweets = collection.find().limit(30)
+    tweets = collection.find({"$and": [
+        {"clase": {"$exists":True}}, {"retweeted_status":{"$exists":False}}]
+    }).limit(1000).sort('retweet_count', -1)
 
-        data = []
+    data = []
+    i=0
+    for doc in tweets:
+        i+=1
+        print(i)
+        hastags = doc["entities"]["hashtags"]
+        concat = ""
+        print(hastags)
+        if(len(hastags) > 0):
+            cont = 0
+            for ht in hastags:
+                cont += 1
+                if cont == len(hastags):
+                    concat = concat + ht["text"]
+                else:
+                    concat = concat + ht["text"] + "," + "\n"
 
-        for doc in tweets:
-            tweet = {
-                "hashtag": "holamundo",
-                "full_text": doc["full_text"],
-                "tema": doc["tema"],
-                "clase": doc["clase"]
-            }
-            data.append(tweet)
 
-    except Exception as e:
-        print(str(e))
+        tweet = {
+            "hashtag": concat,
+            "full_text": doc["full_text"],
+            "tema": doc["tema"],
+            "clase": doc["clase"]
+        }
+        data.append(tweet)
+
+    #except Exception as e:
+    #    print(str(e))
 
     response_data = {}
     response_data["data"] = data
