@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Tweets</title>
+</head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <title>Artworks</title>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.6/css/bootstrap.min.css">
+ <!--   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.10.1/bootstrap-table.min.css"> -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.6/js/bootstrap.min.js"></script>
+ <!--   <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.10.1/bootstrap-table.min.js"></script> -->
+
+
+        <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.11.1/bootstrap-table.min.css">
+
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.11.1/bootstrap-table.min.js"></script>
+
+    <!-- Latest compiled and minified Locales -->
+    <script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.11.1/locale/bootstrap-table-zh-CN.min.js"></script>
+
+    <script>
+
+         $(document).ready(function(){
+            console.log("aaaaa");
+             $.getJSON("/tweets/polaridad/", function (jsonFromFile) {
+                $('#table_2').bootstrapTable({
+                    data: jsonFromFile.data
+                })
+             });
+
+         });
+
+    </script>
+
+
+<body>
+
+<style media="screen" type="text/css">
+
+    table {
+      border: 1px solid black;
+      overflow-x: scroll;
+      max-height: 350px;
+    }
+
+    td,
+    th {
+      border: 1px solid black;
+      width: 1%;
+    }
+
+    .table-fixed thead {
+      width: 100%;
+    }
+
+    .table-fixed tbody {
+      height: 500px;
+      overflow-y: scroll;
+      width: 100%;
+    }
+
+
+
+    table tbody, table thead
+    {
+        display: block;
+    }
+    table tbody
+    {
+       overflow: auto;
+       height: 100px;
+       width: 100%;
+    }
+
+</style>
+
+<container>
+    <panel >
+        <p>Análisis de sentimientos</p>
+
+        <table id="table_2" class="table-fixed table table-bordered table-striped">
+
+                <thead class="thead-dark">
+                    <tr>
+                        <th data-field="hashtag">Hashtag</th>
+                        <th data-field="tema">Tema</th>
+                        <th data-field="full_text">Tweet</th>
+                        <th data-field="clase">Polaridad</th>
+                    </tr>
+                </thead>
+        </table>
+
+    </panel>
+
+</container>
+
+
+</body>
+</html>

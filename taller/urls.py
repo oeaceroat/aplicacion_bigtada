@@ -21,5 +21,6 @@ urlpatterns = [
     path('rss_feed/', include('rss_feed.urls')),
     path('crawler/', include('crawler.urls')),
     path('artworks/', include('artworks.urls')),
+    path('tweets/', include('tweets.urls')),
     path('admin/', admin.site.urls),
 ]

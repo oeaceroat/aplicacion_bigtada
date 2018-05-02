@@ -34,6 +34,7 @@ INSTALLED_APPS = [
     'rss_feed.apps.RssFeedConfig',
     'crawler.apps.CrawlerConfig',
     'artworks.apps.ArtworksConfig',
+    'tweets.apps.TweetsConfig',
     'main.apps.MainConfig',
     'django.contrib.admin',
     'django.contrib.auth',
