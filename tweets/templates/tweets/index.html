@@ -27,12 +27,73 @@
     <script>
 
          $(document).ready(function(){
+
             console.log("aaaaa");
              $.getJSON("/tweets/polaridad/", function (jsonFromFile) {
                 $('#table_2').bootstrapTable({
                     data: jsonFromFile.data
                 })
              });
+
+
+             $('#btnSearch').on('click', function (e) {
+
+                var $selected_option = $('input[name=optradio]:checked').val();
+                console.log($selected_option);
+
+                var $screen = $('#screen').val();
+                console.log($screen);
+                 var $mes = $('#mes').val();
+                console.log($mes);
+                 var $anio = $('#anio').val();
+                console.log($anio);
+
+                var $url_regex_filter = "/tweets/" + $screen + "/" + $mes + "/" + $anio + "/busquedaPorFecha/";
+
+
+                console.log($url_regex_filter)
+
+                $.getJSON($url_regex_filter, function (jsonFromFile) {
+                 console.log('aaaaaa')
+                    data = {data: jsonFromFile.data}
+                    $('#table_3').bootstrapTable(data);
+                });
+         });
+
+
+
+            $('#btnSearch_2').on('click', function (e) {
+
+
+                var $url_evolucion = "/tweets/evolucion/";
+                console.log($url_evolucion)
+
+                $.getJSON($url_evolucion, function (jsonFromFile) {
+
+                    data = {data: jsonFromFile.data}
+                    console.log("data:" + data);
+                    <!--$('#table_3').bootstrapTable(data);-->
+
+                    <!--document.getElementById("graphImage").src = "{% static 'artworks/grafo_pru.png' %}"-->
+
+                    document.getElementById("graphImage1").src = "{% static 'tweets/petrogustavoSeguidores.png' %}";
+                    document.getElementById("graphImage2").src = "{% static 'tweets/sergio_fajardoSeguidores.png' %}";
+                    document.getElementById("graphImage3").src = "{% static 'tweets/IvanDuqueSeguidores.png' %}";
+                    document.getElementById("graphImage4").src = "{% static 'tweets/DeLaCalleHumSeguidores.png' %}";
+                    document.getElementById("graphImage5").src = "{% static 'tweets/German_VargasSeguidores.png' %}";
+
+
+                    document.getElementById("graphImage6").src = "{% static 'tweets/petrogustavoFavoritos.png' %}";
+                    document.getElementById("graphImage7").src = "{% static 'tweets/sergio_fajardoFavoritos.png' %}";
+                    document.getElementById("graphImage8").src = "{% static 'tweets/IvanDuqueFavoritos.png' %}";
+                    document.getElementById("graphImage9").src = "{% static 'tweets/DeLaCalleHumFavoritos.png' %}";
+                    document.getElementById("graphImage10").src = "{% static 'tweets/German_VargasFavoritos.png' %}";
+
+                });
+         });
+
+
+
 
          });
 
@@ -82,7 +143,7 @@
 
 <container>
     <panel >
-        <p>Análisis de sentimientos</p>
+        <h3>Análisis de sentimientos</h3>
 
         <table id="table_2" class="table-fixed table table-bordered table-striped">
 
@@ -95,6 +156,61 @@
                     </tr>
                 </thead>
         </table>
+
+    </panel>
+
+    <panel>
+
+                <label>Nick:</label>
+                <input type="text" class="form-control" id="screen">
+                <label>Mes:</label>
+                <input type="text" class="form-control" id="mes">
+                <label>Año:</label>
+                <input type="text" class="form-control" id="anio">
+                <button type="button" class="btn btn-primary" id="btnSearch">Buscar</button>
+
+            <table id="table_3" class="table-fixed table table-bordered table-striped" >
+
+                <thead class="thead-dark">
+                    <tr>
+                        <th data-field="screen_name">Nick Autor</th>
+                        <th data-field="name">Nombre Autor</th>
+                        <th data-field="full_text">Texto</th>
+                        <th data-field="created_at">Fecha creación</th>
+
+                        <th data-field="tweet_favourites_count">Tweet Favoritos</th>
+                        <th data-field="followers_count">Seguidores Autor</th>
+                        <th data-field="hashtags">Hastags Tweet</th>
+                        <th data-field="user_mentions">Meenciones Tweet</th>
+                        <th data-field="esRetweet">Es Retweed</th>
+                        <th data-field="retweet_nombre">Autor R</th>
+                        <th data-field="retweet_screen_name">Nick Autor R</th>
+
+
+                    </tr>
+                </thead>
+            </table>
+
+    </panel>
+
+    <panel>
+        <h3>Evolución en el tiempo</h3>
+        <button type="button" class="btn btn-primary" id="btnSearch_2">Visualizar evolución</button>
+        <div>
+                <img id="graphImage1" src="#" alt="Aquí se mostrará imagen"/>
+                <img id="graphImage2" src="#" alt="Aquí se mostrará imagen"/>
+                <img id="graphImage3" src="#" alt="Aquí se mostrará imagen"/>
+                <img id="graphImage4" src="#" alt="Aquí se mostrará imagen"/>
+                <img id="graphImage5" src="#" alt="Aquí se mostrará imagen"/>
+         </div>
+        <div>
+            <img id="graphImage6" src="#" alt="Aquí se mostrará imagen"/>
+            <img id="graphImage7" src="#" alt="Aquí se mostrará imagen"/>
+            <img id="graphImage8" src="#" alt="Aquí se mostrará imagen"/>
+            <img id="graphImage9" src="#" alt="Aquí se mostrará imagen"/>
+            <img id="graphImage10" src="#" alt="Aquí se mostrará imagen"/>
+        </div>
+
 
     </panel>
 
