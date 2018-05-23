@@ -10,6 +10,7 @@ urlpatterns = [
     path('get_artists/', views.getMusicalArtists, name='get_artists'),
     path('get_songs/', views.getSongs, name='get_songs'),
     path('get_places/', views.getPlaces, name='get_places'),
+    path('get_quiestions/', views.getQuestions, name='get_quiestions'),
 
 
 ]

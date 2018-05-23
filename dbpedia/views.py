@@ -22,6 +22,41 @@ def index(request):
     #}
     return render(request, 'dbpedia/index.html', context)
 
+def getQuestions(request):
+
+
+    #client = MongoClient('127.0.0.1', 27017)
+    #db = client.taller4  # Local
+
+    client = MongoClient('bigdata-mongodb-01', 27017)  # Produccion
+    db = client.Grupo01_Taller4  # Produccion
+
+
+    obj = {}
+    data = []
+    cursor_questions = db.questions.find({}).limit(1000)
+
+    for q in cursor_questions:
+
+        obj = {}
+        obj["question_title"] = q["body"]
+        cursor_answers = db.answers.find({"question_id": q["question_id"]}).limit(1000)
+
+        text = ""
+        i = 1
+        for a in cursor_answers:
+
+            aux = str(i) + ") " + a["body"] + "\n"
+            text += aux
+            i += 1
+        obj["answers"] = text
+        data.append(obj)
+
+    response_data = {}
+    response_data["data"] = data
+    return JsonResponse(response_data)
+
+
 def getMusicalArtists(request):
 
     #client = MongoClient('127.0.0.1', 27017)
@@ -53,9 +88,9 @@ def getMusicalArtists(request):
             obj["deathDate"] = "-"
 
         try:
-            obj["residence"] = entidad["data"]["residence"]["value"]
+            obj["residence_name"] = entidad["data"]["residence_name"]["value"]
         except Exception as e:
-            obj["residence"] = "-"
+            obj["residence_name"] = "-"
         try:
             obj["birthPlace"] = entidad["data"]["birthPlace_name"]["value"]
         except Exception as e:
@@ -311,3 +346,4 @@ def enrichSong(song_name):
         data['release_date'] = t['album']['release_date']
 
     return data
+

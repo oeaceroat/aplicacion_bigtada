@@ -69,6 +69,20 @@
                 });
             });
 
+             $('#btnGetQuestions').on('click', function (e) {
+
+                var $url_quiestions = "/dbpedia/get_quiestions/";
+
+
+                console.log($url_quiestions)
+
+                $.getJSON($url_quiestions, function (jsonFromFile) {
+                 console.log('aaaaaa')
+                    data = {data: jsonFromFile.data}
+                    $('#table_4').bootstrapTable(data);
+                });
+            });
+
 
          });
 
@@ -117,6 +131,23 @@
 </style>
 
 <container>
+
+    <panel>
+        <h3>Preguntas y Respuestas</h3>
+
+        <button type="button" class="btn btn-primary" id="btnGetQuestions">Buscar</button>
+        <table id="table_4" class="table-fixed table table-bordered table-striped">
+
+                <thead class="thead-dark">
+                    <tr>
+                        <th data-field="question_title">Pregunta</th>
+                        <th data-field="answers">Respuestas</th>
+
+                    </tr>
+                </thead>
+        </table>
+
+    </panel>
     <panel>
         <h3>Artistas Musicales</h3>
 
@@ -128,8 +159,7 @@
                         <th data-field="id">Entidad</th>
                         <th data-field="birthDate">Fecha Nacimiento</th>
                         <th data-field="deathDate">Fecha Fallecimiento</th>
-                        <th data-field="genre">Género Musical</th>
-                        <th data-field="residence">Lugar Residencia</th>
+                        <th data-field="residence_name">Lugar Residencia</th>
                         <th data-field="birthPlace">Lugar Nacimiento</th>
                         <th data-field="genre">Género Musical</th>
                     </tr>
