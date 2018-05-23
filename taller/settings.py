@@ -35,6 +35,7 @@ INSTALLED_APPS = [
     'crawler.apps.CrawlerConfig',
     'artworks.apps.ArtworksConfig',
     'tweets.apps.TweetsConfig',
+    'dbpedia.apps.DbpediaConfig',
     'main.apps.MainConfig',
     'django.contrib.admin',
     'django.contrib.auth',

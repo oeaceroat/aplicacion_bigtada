@@ -22,5 +22,6 @@ urlpatterns = [
     path('crawler/', include('crawler.urls')),
     path('artworks/', include('artworks.urls')),
     path('tweets/', include('tweets.urls')),
+    path('dbpedia/', include('dbpedia.urls')),
     path('admin/', admin.site.urls),
 ]

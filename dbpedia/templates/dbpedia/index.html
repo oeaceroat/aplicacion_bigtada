@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    {% load static %}
+    <meta charset="UTF-8">
+    <title>Entidades</title>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.6/css/bootstrap.min.css">
+ <!--   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.10.1/bootstrap-table.min.css"> -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.6/js/bootstrap.min.js"></script>
+ <!--   <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.10.1/bootstrap-table.min.js"></script> -->
+
+
+        <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.11.1/bootstrap-table.min.css">
+
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.11.1/bootstrap-table.min.js"></script>
+
+    <!-- Latest compiled and minified Locales -->
+    <script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.11.1/locale/bootstrap-table-zh-CN.min.js"></script>
+
+    <script>
+
+         $(document).ready(function(){
+
+            $('#btnGetArtists').on('click', function (e) {
+
+                var $url_artist = "/dbpedia/get_artists/";
+
+
+                console.log($url_artist)
+
+                $.getJSON($url_artist, function (jsonFromFile) {
+                 console.log('aaaaaa')
+                    data = {data: jsonFromFile.data}
+                    $('#table_1').bootstrapTable(data);
+                });
+            });
+
+            $('#btnGetSongs').on('click', function (e) {
+
+                var $url_song = "/dbpedia/get_songs/";
+
+
+                console.log($url_song)
+
+                $.getJSON($url_song, function (jsonFromFile) {
+                 console.log('aaaaaa')
+                    data = {data: jsonFromFile.data}
+                    $('#table_2').bootstrapTable(data);
+                });
+            });
+
+
+            $('#btnGetPlaces').on('click', function (e) {
+
+                var $url_place = "/dbpedia/get_places/";
+
+
+                console.log($url_place)
+
+                $.getJSON($url_place, function (jsonFromFile) {
+                 console.log('aaaaaa')
+                    data = {data: jsonFromFile.data}
+                    $('#table_3').bootstrapTable(data);
+                });
+            });
+
+
+         });
+
+    </script>
+
+</head>
+<body>
+
+<style media="screen" type="text/css">
+
+    table {
+      border: 1px solid black;
+      overflow-x: scroll;
+      max-height: 350px;
+    }
+
+    td,
+    th {
+      border: 1px solid black;
+      width: 1%;
+    }
+
+    .table-fixed thead {
+      width: 100%;
+    }
+
+    .table-fixed tbody {
+      height: 500px;
+      overflow-y: scroll;
+      width: 100%;
+    }
+
+
+
+    table tbody, table thead
+    {
+        display: block;
+    }
+    table tbody
+    {
+       overflow: auto;
+       height: 100px;
+       width: 100%;
+    }
+
+</style>
+
+<container>
+    <panel>
+        <h3>Artistas Musicales</h3>
+
+        <button type="button" class="btn btn-primary" id="btnGetArtists">Buscar</button>
+        <table id="table_1" class="table-fixed table table-bordered table-striped">
+
+                <thead class="thead-dark">
+                    <tr>
+                        <th data-field="id">Entidad</th>
+                        <th data-field="birthDate">Fecha Nacimiento</th>
+                        <th data-field="deathDate">Fecha Fallecimiento</th>
+                        <th data-field="genre">Género Musical</th>
+                        <th data-field="residence">Lugar Residencia</th>
+                        <th data-field="birthPlace">Lugar Nacimiento</th>
+                        <th data-field="genre">Género Musical</th>
+                    </tr>
+                </thead>
+        </table>
+
+    </panel>
+
+    <panel>
+        <h3>Canciones</h3>
+
+        <button type="button" class="btn btn-primary" id="btnGetSongs">Buscar</button>
+        <table id="table_2" class="table-fixed table table-bordered table-striped">
+
+                <thead class="thead-dark">
+                    <tr>
+                        <th data-field="id">Entidad</th>
+                        <th data-field="artist">Artista</th>
+                        <th data-field="album">Álbum</th>
+                        <th data-field="duration_ms">Duración (minutos)</th>
+                        <th data-field="release_date">Fecha Lanzamiento</th>
+                        <th data-field="popularity">Popularidad</th>
+                    </tr>
+                </thead>
+        </table>
+
+
+    </panel>
+
+
+    <panel>
+        <h3>Lugares</h3>
+
+        <button type="button" class="btn btn-primary" id="btnGetPlaces">Buscar</button>
+        <table id="table_3" class="table-fixed table table-bordered table-striped">
+
+                <thead class="thead-dark">
+                    <tr>
+                        <th data-field="id">Entidad</th>
+                        <th data-field="point">Coordenadas</th>
+                        <th data-field="name_location">Ciudad</th>
+                        <th data-field="name_partOf">Estado/Departamento/Region</th>
+                        <th data-field="name_country">País</th>
+                    </tr>
+                </thead>
+        </table>
+
+
+    </panel>
+
+</container>
+
+</body>
+</html>

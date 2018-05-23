@@ -163,6 +163,7 @@ def getEvolucion(request):
         plt.title(titulo_1)
         plt.savefig(ruta_base + screen + 'Favoritos.png', dpi=100, bbox_inches='tight')
         plt.close()
+
         plt.plot(wer.groupby('fecha')['followers_count'].mean())
         plt.xticks(rotation=90)
         titulo_2 = "Seguidores @" + screen
